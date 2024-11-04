@@ -1,41 +1,53 @@
-const express= require("express");
-const connectDb= require("./config/dbConnection");
+const express = require("express");
+const connectDb = require("./config/dbConnection");
 const errorHandler = require("./middlewares/errorHandler");
-const cors= require ("cors");
+const cors = require("cors");
+const hbs = require("hbs");
 const path = require("path");
+
 // env file config
 const dotenv = require("dotenv");
 dotenv.config();
 
 connectDb();
 const app = express();
-const port= process.env.PORT || 5000;
+const port = process.env.PORT || 5000;
 
 app.use(express.json());
 app.use(cors());
 
-//Error handling
-app.use(errorHandler);
+// using hbs as the view engine
+app.set('view engine', 'hbs');
 
+// Register partials
+hbs.registerPartials(path.join(__dirname, 'views/partials'));
 
-//Routes below
-app.get("/",(req,res)=>{
-    res.send("working")
+// Route for user registration and authentication
+app.use("/api/register", require("./routes/userRoutes"));
+
+// Routes below
+app.get("/", (req, res) => {
+    res.send("working");
 });
 
-app.set('view engine' , 'hbs');
-var hbs = require('hbs');
-hbs.registerPartials(path.join(__dirname, '/views/partials'));
-app.get("/home",(req,res)=>{
-    res.render("home",{
-        users: [
-            { username: "P", date: "23-10-2024", subject: "Maths" },
-            { username: "Aa", date: "23-10-2024", subject: "Science" },
-            { username: "I", date: "23-10-2024", subject: "History" }
-        ]
-    })
-})
+app.get("/home", (req, res) => {
+    res.render("home", { 
+        username: "Piyush",
+        age: 20,
+    });
+});
 
+app.get("/user", (req, res) => {
+    const users = [
+        { username: "a", age: 20 },
+        { username: "b", age: 22 },
+        { username: "c", age: 21 }
+    ];
+    res.render("user", { users });
+});
+
+// Error handling middleware should be at the end
+app.use(errorHandler);
 
 app.listen(port, () => {
     console.log(`Server is running on port http://localhost:${port}`);
