@@ -12,27 +12,31 @@ const userSchema = mongoose.Schema(
         },
         email: {
             type: String,
-            require: [true, "Please Enter Your Email"],    
+            require: [true,"Enter your email"],
         },
         password: {
             type: String,
-            require: [true, "Please Enter Your Password"], 
+            require: [true,"Enter your password"],
         },
         age: {
-            type: Number,
-            require: [true, "Please Enter Your Age"],
+            type: String,
+            require: [true,"Enter your name"],
         },
         gender: {
             type: String,
-            require: [true, "Please Enter Your Gender"],
+            require: [true,"Enter your name"],
         },
-        BloodGroup: {
+        bloodGroup: {
             type: String,
-            require: [true, "Please Enter Your Blood Group"],
+            require: [true,"Enter your name"],
         },
         phoneNumber: {
-            type: Number,
-            require: [true, "Please Enter Your Phone Number"],
+            type: String,
+            require: [true,"Enter your name"],
         },
-    }
-);
+    },
+    {}
+)
+
+const User = mongoose.model('User', userSchema);
+module.exports = User;
