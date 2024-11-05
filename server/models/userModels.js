@@ -12,31 +12,30 @@ const userSchema = mongoose.Schema(
         },
         email: {
             type: String,
-            require: [true,"Enter your email"],
+            require: [true, "Please Enter Your Email"],    
         },
         password: {
             type: String,
-            require: [true,"Enter your password"],
+            require: [true, "Please Enter Your Password"], 
         },
         age: {
-            type: String,
-            require: [true,"Enter your name"],
+            type: Number,
+            require: [true, "Please Enter Your Age"],
         },
         gender: {
             type: String,
-            require: [true,"Enter your name"],
+            require: [true, "Please Enter Your Gender"],
         },
-        bloodGroup: {
+        bloodGroup: { // Correcting this from BloodGroup to bloodGroup to keep consistency
             type: String,
-            require: [true,"Enter your name"],
+            require: [true, "Please Enter Your Blood Group"],
         },
         phoneNumber: {
-            type: String,
-            require: [true,"Enter your name"],
+            type: Number,
+            require: [true, "Please Enter Your Phone Number"],
         },
-    },
-    {}
-)
+    }
+);
 
-const User = mongoose.model('User', userSchema);
-module.exports = User;
+// User model ko export karo
+module.exports = mongoose.model("User", userSchema);
