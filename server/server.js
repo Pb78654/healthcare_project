@@ -45,9 +45,9 @@ app.get("/home", (req, res) => {
 
 app.get("/user", (req, res) => {
     const users = [
-        { username: "Piyush", age: 20 },
-        { username: "Aditi", age: 22 },
-        { username: "Pratham", age: 21 }
+        { username: "a", age: 20 },
+        { username: "b", age: 22 },
+        { username: "c", age: 21 }
     ];
     
     res.render("user", { users });
