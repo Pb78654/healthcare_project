@@ -30,4 +30,4 @@ const validateJwtToken = (req , res , next)=>{
     
 }
 
-module.exports={generateJwtToken , validateJwtToken}
+module.exports={jwtAuthmiddleware: validateJwtToken}
