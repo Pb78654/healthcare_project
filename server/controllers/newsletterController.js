@@ -20,6 +20,18 @@ const enternewsletter = asyncHandler(async (req, res) => {
         imageurl
     });
 
+    if (news) { 
+        res.status(201).json({
+            titlename: news.titlename,
+            author: news.author,
+            date: news.date,
+            description: news.description,
+            imageurl: news.imageurl
+        });
+    } else {
+        res.status(400);
+        throw new Error("Invalid user data");
+    }
 });
 
 module.exports = {enternewsletter};
