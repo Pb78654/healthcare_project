@@ -1,37 +1,36 @@
 const asyncHandler = require("express-async-handler");
-const newsletter = require("../models/newsletterModels");
+const NewsLetter = require("../models/newsLetterModel");
 require('dotenv').config();
 
 
-const enternewsletter = asyncHandler(async (req, res) => {
-    const { titlename, author, date, description, imageurl} = req.body;
+const publicnewsLetter = asyncHandler(async (req, res) => {
+    const { title, author, date, description, imageurl } = req.body
 
-    if (!titlename || author || !date || !description || !imageurl) {
+    if (!title || !author || !date || !description || !imageurl) {
         res.status(400);
-        throw new Error("Please fill all fields");
+        throw new Error("Enter all Fields");
     }
 
-    // Create newsletter
-    const news = await newsletter.create({
-        titlename,
+    const newLetter = await NewsLetter.create({
+        title,
         author,
         date,
         description,
-        imageurl
+        imageurl,
     });
 
-    if (news) { 
+    if (newLetter) {
         res.status(201).json({
-            titlename: news.titlename,
-            author: news.author,
-            date: news.date,
-            description: news.description,
-            imageurl: news.imageurl
-        });
-    } else {
+            title: NewsLetter.title,
+            author: NewsLetter.author,
+            date: NewsLetter.date,
+            description: NewsLetter.description,
+            imageurl: NewsLetter.imageurl,
+        })
+    }else{
         res.status(400);
-        throw new Error("Invalid user data");
+        throw new Error("Invalid data");
     }
-});
+})
 
-module.exports = {enternewsletter};
+module.exports = {publicnewsLetter};
